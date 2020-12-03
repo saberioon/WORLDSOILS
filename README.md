@@ -1,3 +1,7 @@
+Datasets are stored under __"compressed"__ folder  
+
+
+
 
 
 The resampled Soil Spectral Libraries
