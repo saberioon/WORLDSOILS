@@ -24,6 +24,48 @@ The LUCAS 2015 and Brazilian datasets were split into calibration (66%) and test
 
 #### 3 DESCRIPTION OF DATASETS
 
- __Check the readme_data_partition_20201130 for details__
+lucas15: [1] EnMAP_resampled_lucas15.csv, [2] L8_resampled_lucas15.csv, [3] S2a_resampled_lucas15.csv, [4] S2b_resampled_lucas15.csv, [5] CHIME_resampled_lucas15.csv
 
-  
+| Field                  | Description                                           | Units/     Values |
+| ---------------------- | ----------------------------------------------------- | ----------------- |
+| PointID                | Unique identifier of the LUCAS survey point           | 8 digits number   |
+| OC                     | Organic carbon content                                | g/kg              |
+| [1] B_423.03…B_2438.6  | Re-sampled reflectance data with ~10nm resolution     | Reflectance (%)   |
+| [2] B_444.5… B_2194.5  | Re-sampled reflectance data with ~20-200nm resolution | Reflectance (%)   |
+| [3] B_442.7 … B_2202.4 | Re-sampled reflectance data with ~10-60nm resolution  | Reflectance (%)   |
+| [4] B_442.3 … B_2185.7 | Re-sampled reflectance data with ~10-60nm resolution  | Reflectance (%)   |
+| [5] 421…2479           | Re-sampled reflectance data with ~7nm resolution      | Reflectance (%)   |
+
+BSSL: [1] EnMAP_resampled_bssl.csv, [2] L8_resampled_bssl.csv, [3] S2a_resampled_bssl.csv, [4] S2b_resampled_bssl.csv, [5] CHIME_resampled_bssl.csv
+
+| Field                  | Description                                           | Units/     Values |
+| ---------------------- | ----------------------------------------------------- | ----------------- |
+| PointID                | Unique identifier of the Brazilian survey point       | 4-5 digits number |
+| OC                     | Organic carbon content                                | %                 |
+| [1] B_423.03…B_2438.6  | Re-sampled reflectance data with ~10nm resolution     | Reflectance (%)   |
+| [2] B_444.5… B_2194.5  | Re-sampled reflectance data with ~20-200nm resolution | Reflectance (%)   |
+| [3] B_442.7 … B_2202.4 | Re-sampled reflectance data with ~10-60nm resolution  | Reflectance (%)   |
+| [4] B_442.3 … B_2185.7 | Re-sampled reflectance data with ~10-60nm resolution  | Reflectance (%)   |
+| [5] 421…2479           | Re-sampled reflectance data with ~10nm resolution     | Reflectance (%)   |
+
+Description of the fields in the clhs_lucas15.csv file:
+
+| Field   | Description                                                  | Units/     Values |
+| ------- | ------------------------------------------------------------ | ----------------- |
+| PointID | Unique identifier of the LUCAS survey point                  | 8 digits number   |
+| class   | Class indicating where each sample belongs cal or val datasets | Calibration/test  |
+
+Description of the fields in the clhs_brazilian.csv file:
+
+| Field   | Description                                                  | Units/     Values |
+| ------- | ------------------------------------------------------------ | ----------------- |
+| PointID | Unique identifier of the Brazilian survey point              | 4-5 digits number |
+| class   | Class indicating where each sample belongs cal or val datasets | Calibration/test  |
+
+References
+
+Lehnert, L. W., Meyer, H., Obermeier, W. A., Silva, B., Regeling, B., Thies, B., & Bendix, J. (2019). Hyperspectral Data Analysis in {R}: The {hsdar} Package. *Journal of Statistical Software*, *89*(12), 1–23. https://doi.org/10.18637/jss.v089.i12
+
+Minasny, B., & McBratney, A. B. (2006). A conditioned Latin hypercube method for sampling in the presence of ancillary information. *Computers & Geosciences*, *32*(9), 1378–1388. https://doi.org/https://doi.org/10.1016/j.cageo.2005.12.009
+
+R Development Core Team. (2013). R: A language and environment for statistical computing. *R Foundation for Statistical Computing, Vienna, Austria*.
