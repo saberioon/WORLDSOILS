@@ -8,7 +8,7 @@ Tips:
 
 * Push predicted-observed values in CSV format.
 
-* The model’s results (RMSE, R-square, RPD). 
+* The model’s results (RMSE, R-square, RPD) in any text format. 
 
 * No need to upload any plot. 
 
