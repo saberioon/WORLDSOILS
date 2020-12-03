@@ -1,8 +1,8 @@
-Datasets are stored under __"compressed"__ folder  
+##### Datasets are stored under __"compressed"__ folder  
 
 
 
-
+#### Description:
 
 The resampled Soil Spectral Libraries
 This package contains ten soil spectral datasets that simulated two current multispectral (Landsat 8 OLI, Sentinel-2 MSI, both 2a and 2b) and two forthcoming hyperspectral (EnMAP, CHIME) satellite sensors. The LUCAS15 and Brazilian soil spectral libraries (SSLs) were utilized to produce two different sets of “resampled” spectra. A first set of spectra was obtained by re-sampling the SSLs, using convolution procedures, to the specific spectral response of the Sentinel-2 (a&b) and Landsat8. This process was carried out using the associated spectral response functions. On the other hand, for EnMAP we utilized Gaussian functions.
@@ -10,6 +10,7 @@ This package contains ten soil spectral datasets that simulated two current mult
 #### 1 SATELLITE SENSORS
 The main technical specifications of the satellite spectral sensors are summarized, in Table 1.
 Table 1: Main technical characteristics of the spaceborne sensors considered in this study. The FWHM column indicates the minimum and the maximum of the sensor's bandwidth
+
 |Sensor|	Spectral bands|	Spectral range|	FHWM (nm)|
 |---|-----|---|---|
 |Sentinel-2MSI|	12	|9VNIR-3SWIR|	10-60|
