@@ -1,5 +1,7 @@
 Check the [Wiki page](https://github.com/saberioon/WORLDSOILS/wiki) for Documentation.
 
+Check the [Project tab](https://github.com/saberioon/WORLDSOILS/projects/1) for tracking tasks.
+
 Deadline for delivering model's outputs: __15 Jan 2021__
 
 Tips:
