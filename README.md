@@ -20,7 +20,7 @@ The resampling analyses were performed using the hsdar (Lehnert et al., 2019) pa
 #### 2 DATA PARTITIONS
 
 The LUCAS 2015 and Brazilian datasets were split into calibration (66%) and test (33%) sets, using the Conditioned Latin Hypercube Sampling algorithm (Minasny & McBratney, 2006), which is an effective way to replicate the multivariate distribution of the input space in the calibration set. This will enable the learning algorithms to construct their models using data which are representative in the spectral space, compared to Kennard Stone split.
- ( Check the readme_data_partition_20201130 for plots )
+ ( Check the __readme_data_partition_20201130.docx__ for plots )
 
 #### 3 DESCRIPTION OF DATASETS
 
