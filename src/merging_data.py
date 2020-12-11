@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText:
+# SPDX-License-Identifier: MIT
+
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+"""
+This script merging and assiging split index (calibration, test) which aquired based on CLHS
+
+written by : Mohammadmehdi Saberioon,PhD.
+revised date: 11.12.2020
+
+"""
+
+import pandas as pd
+import sys
+import os
+
+
+def prepare_data_set(df1, df2: pd.DataFrame) -> pd.DataFrame:
+    """
+    Prepare the raw data by :
+        - merging data according to CLHS
+        - splitting to calibration and test
+
+    Arg:
+        df1: A panda DataFrame/ spliting information.
+        df2: A panda DataFram/ LUCAS data
+
+    Returns:
+        One panda DataFrames with column split :1.Calibration 2.Test
+    """
+
+    df1.index.name = df2.index.name = 'ID'
+    data_frame = df1.merge(df2, left_index=True, right_index=True)
+
+    return data_frame
+
+
+def run():
+    if len(sys.argv) == 1:  # no arguments, so print help message
+        print("""Usage: python script.py data_path program_input out_path""")
+        return
+    dir_in_f1 = os.getcwd()
+    dir_in_f2 = os.getcwd()
+    dir_out = os.getcwd()
+
+    try:
+        dir_in_f1 = sys.argv[1]
+        dir_in_f2 = sys.argv[2]
+        dir_out = sys.argv[3]
+    except:
+        print("Parameters: path/to/simple/file  input/folder  output/folder")
+        sys.exit(0)
+
+    df1 = pd.read_csv(dir_in_f1).set_index("ID")
+    df2 = pd.read_csv(dir_in_f2).set_index("PointID")
+
+    df_out = prepare_data_set(df1, df2)
+    df_out.to_csv(dir_out, index=True)
+
+
+if __name__ == "__main__":
+    run()
