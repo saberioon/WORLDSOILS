@@ -20,7 +20,7 @@ Tips:
 
 
 
-merging_data.py:
+__*merging_data.py*__:
 
 merging two csv files based on their ID 
 
@@ -30,7 +30,7 @@ python merhing_data.py clhs_lucas15.csv S2a_resampled_lucas15.csv
 
 
 
-LUCAS15_analysis.py:
+__*LUCAS15_analysis.py*__:
 
 Modelling  LUCAS or BSSL data using FNN
 
@@ -40,27 +40,17 @@ python LUCAS15_analysis.py /path/to/input_file /path/to/output_folder
 
  
 
-metrics.py:
+__*metrics.py*__:
 
 calculating R-square, RPD, MSE, RMSE 
 
 
 
-submitJOB.sh:
+__*submitJOB.sh*__:
 
 Submit jobs to cluster 
 
 
 
-
-
-
-
-
-
-
-
-
-
-Updated: 3 Dec 2020
+Updated: 15 Dec 2020
 
