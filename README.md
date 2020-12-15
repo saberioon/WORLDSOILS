@@ -18,5 +18,49 @@ Tips:
 
 
 
+
+
+merging_data.py:
+
+merging two csv files based on their ID 
+
+```bash
+python merhing_data.py clhs_lucas15.csv S2a_resampled_lucas15.csv
+```
+
+
+
+LUCAS15_analysis.py:
+
+Modelling  LUCAS or BSSL data using FNN
+
+```
+python LUCAS15_analysis.py /path/to/input_file /path/to/output_folder
+```
+
+ 
+
+metrics.py:
+
+calculating R-square, RPD, MSE, RMSE 
+
+
+
+submitJOB.sh:
+
+Submit jobs to cluster 
+
+
+
+
+
+
+
+
+
+
+
+
+
 Updated: 3 Dec 2020
 
