@@ -18,7 +18,13 @@ Tips:
 
 
 
+To download database and Source code you can use :
 
+```
+git clone https://github.com/saberioon/WORLDSOILS.git
+```
+
+> This is a private repository, therefore you need to enter your GitHub's password  
 
 __*merging_data.py*__:
 
