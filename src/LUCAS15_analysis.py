@@ -15,12 +15,17 @@ revised date: 08.12.2020
 import random
 
 import pandas as pd
+from pathlib import Path
 # import numpy as np
 import sys
 import os
 import argparse
 import metrics
+import matplotlib.pyplot as plt
 import tensorflow as tf
+
+plt.style.use("ggplot")
+_OUTPUT_PATH = "script-out"
 
 
 def parse_arg():
@@ -52,8 +57,8 @@ def splitting_dataset(data_frame: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
         two pandas dataFrame: df_x and df_y
 
     """
-    data_frame_x = data_frame.iloc[:, 6:]
-    data_frame_y = data_frame.iloc[:, 5]
+    data_frame_x = data_frame.iloc[:, 5:]
+    data_frame_y = data_frame.iloc[:, 4]
 
     return data_frame_x, data_frame_y
 
@@ -67,10 +72,20 @@ def build_fnn(data_frame_x: pd.DataFrame):
 
     """
     fnn_model = tf.keras.models.Sequential()
+    # input layer + first hidden layer
     fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
                                         activation='relu',
                                         input_shape=[data_frame_x.shape[1]]))
     fnn_model.add(tf.keras.layers.Dropout(0.2))
+
+    # second hidden layer
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model.add(tf.keras.layers.Dropout(0.2))
+
+    # third hidden layer
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model.add(tf.keras.layers.Dropout(0.2))
+
     fnn_model.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
@@ -80,6 +95,47 @@ def build_fnn(data_frame_x: pd.DataFrame):
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
 
     return fnn_model
+
+
+def create_prediction_plot(obs_data_frame: pd.DataFrame, prd_data_frame: pd.DataFrame):
+    """
+
+    """
+    fig, axs = plt.subplots(nrows=1,
+                            ncols=1,
+                            sharex=True)
+    axs.scatter(obs_data_frame, prd_data_frame, color='blue')
+    axs.plot(obs_data_frame, obs_data_frame, color='red')
+    axs.set_title("title")
+    axs.set_xlabel("X_axis")
+    axs.set_ylabel("Y_axis")
+    save(fig, "FNN_prediction.png")
+
+
+def create_losses_plot(data_frame_losses: pd.DataFrame):
+    """
+
+    :return:
+    """
+    fig, axs = plt.subplots(nrows=1,
+                            ncols=1,
+                            sharex=True)
+    axs.plot(data_frame_losses)
+    axs.set_title("title")
+    axs.set_xlabel("X_axis")
+    axs.set_ylabel("Y_axis")
+    save(fig, "FNN_losses.png")
+
+
+def save(fig: plt.Figure, filename: str):
+    """
+    Saves a matplotlib Figure to a file. It overwrites existing files with the same filename.
+
+    Args:
+    fig: matplotlib.pyplot.Figure
+    filename: str
+    """
+    fig.savefig(Path(_OUTPUT_PATH).resolve() / Path(filename))
 
 
 def perform_analysis():
@@ -121,12 +177,16 @@ def perform_analysis():
     model.fit(x_train, y_train, batch_size=20, epochs=400, validation_data=(x_test, y_test), callbacks=[early_stop])
 
     fnn_losses = pd.DataFrame(model.history.history)
+    create_losses_plot(fnn_losses)
 
     predictions = model.predict(x_test)
 
     print("MSE:", metrics.MSE(y_test, predictions))
     print("RMSE:", metrics.RMSE(y_test, predictions))
     print("R-square:", metrics.R2(y_test, predictions))
+    print("RPD:", metrics.RPD(y_test, predictions))
+
+    create_prediction_plot(y_test, predictions)
 
 
 # Main entry point
