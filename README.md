@@ -1,3 +1,7 @@
+https://img.shields.io/badge/version-v0.1--beta.2-blue
+
+
+
 Check the [Wiki page](https://github.com/saberioon/WORLDSOILS/wiki) for Documentation.
 
 Check the [Project tab](https://github.com/saberioon/WORLDSOILS/projects/1) for tracking tasks.
