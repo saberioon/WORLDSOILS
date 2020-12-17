@@ -1,4 +1,4 @@
-![https://github.com/saberioon/WORLDSOILS/releases](https://img.shields.io/badge/version-v0.1--beta.2-blue)
+[![ ](https://img.shields.io/badge/version-v0.1--beta.2-blue)](https://github.com/saberioon/WORLDSOILS)
 
 
 
