@@ -1,6 +1,4 @@
-![](https://img.shields.io/badge/version-v0.1--beta.2-blue)
-
-
+[![ ](https://img.shields.io/badge/version-v0.1--beta.2-blue)](https://github.com/saberioon/WORLDSOILS)
 
 
 
@@ -24,13 +22,17 @@ Tips:
 
 
 
-To download database and Source code you can use :
+To download database and Source code/datasets you can use :
 
 ```
 git clone https://github.com/saberioon/WORLDSOILS.git
 ```
 
 > This is a private repository, therefore you need to enter your GitHub's password  
+
+datasets are available in : data folder 
+
+
 
 __*merging_data.py*__:
 

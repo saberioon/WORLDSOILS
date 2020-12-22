@@ -1,0 +1,25 @@
+name: DL2
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+
+  - keras=2.3.1=0
+  - keras-applications=1.0.8=py_1
+  - keras-base=2.3.1=py37_0
+  - keras-preprocessing=1.1.0=py_1
+  - markdown=3.3.1=py37_0
+  - matplotlib=3.1.2=py37h4fdacc2_0
+  - numpy=1.15.0=py37h2aefc1b_0
+  - numpy-base=1.15.0=py37h7cdd4dd_0
+  - pandas=1.0.5=py37h0573a6f_0
+  - pip=20.2.3=py37_0
+  - python=3.7.9=h7579374_0
+  - scikit-learn=0.23.2=py37h0573a6f_0
+  - scipy=1.1.0=py37_nomklh9c1e066_0
+  - tensorboard=1.14.0=py37hf484d3e_0
+  - tensorboard-plugin-wit=1.6.0=py_0
+  - tensorflow=1.14.0=mkl_py37h45c423b_0
+  - tensorflow-base=1.14.0=mkl_py37h7ce6ba3_0
+  - tensorflow-estimator=1.14.0=py_0
+  - yaml=0.2.5=h7b6447c_0
