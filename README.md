@@ -1,4 +1,4 @@
-[![ ](https://img.shields.io/badge/version-v0.1--beta.2-blue)](https://github.com/saberioon/WORLDSOILS)
+[![ ](https://img.shields.io/badge/version-v0.1--beta.3-blue)](https://github.com/saberioon/WORLDSOILS)
 
 
 
@@ -9,8 +9,6 @@ Check the [Project tab](https://github.com/saberioon/WORLDSOILS/projects/1) for 
 Deadline for delivering model's outputs: __15 Jan 2021__
 
 Tips:
-
-* Datasets are stored under __"compressed"__ folder . 
 
 * Push predicted-observed values in CSV format.
 
@@ -24,7 +22,7 @@ Tips:
 
 To download database and Source code/datasets you can use :
 
-```
+```bash
 git clone https://github.com/saberioon/WORLDSOILS.git
 ```
 

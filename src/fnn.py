@@ -29,7 +29,8 @@ _OUTPUT_PATH = "script-out"
 
 
 def parse_arg():
-    parser = argparse.ArgumentParser(prog='LUCAS15_analysis.py', description='Fully connected neural network for WORLDSOIL')
+    parser = argparse.ArgumentParser(prog='LUCAS15_analysis.py',
+                                     description='Fully connected neural network for WORLDSOIL')
     parser.add_argument("-i", "--input", dest='input', type=str, help="", required=True)
     parser.add_argument("-o", "--output", dest='output', type=str, help="output filename ")
     parser.add_argument("-b", "--batchSize", dest="batchSize", type=int, help="batch size value", default=20)
@@ -69,7 +70,7 @@ def splitting_dataset(data_frame: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
     return data_frame_x, data_frame_y
 
 
-def build_fnn(data_frame_x: pd.DataFrame):
+def build_fnn_3l(data_frame_x: pd.DataFrame):
     """
     Building fully connected neural network (FNN) on data
 
@@ -92,8 +93,8 @@ def build_fnn(data_frame_x: pd.DataFrame):
     fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     # third hidden layer
-    # fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
-    # fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model.add(tf.keras.layers.Dense(1))
 
@@ -104,6 +105,70 @@ def build_fnn(data_frame_x: pd.DataFrame):
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
 
     return fnn_model
+
+
+def build_fnn_2l(data_frame_x: pd.DataFrame):
+    """
+    Building fully connected neural network (FNN) on data with two layers
+
+    Returns:
+        model
+
+    """
+    parser = parse_arg()
+    args = parser.parse_args()
+
+    fnn_model_2l = tf.keras.models.Sequential()
+    # input layer + first hidden layer
+    fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
+                                           activation='relu',
+                                           input_shape=[data_frame_x.shape[1]]))
+    fnn_model_2l.add(tf.keras.layers.Dropout(args.dropOut))
+
+    # second hidden layer
+    fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model_2l.add(tf.keras.layers.Dropout(args.dropOut))
+
+    fnn_model_2l.add(tf.keras.layers.Dense(1))
+
+    # fnn_model.summary()
+
+    fnn_model_2l.compile(optimizer='adam', loss='mse')
+
+    # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
+
+    return fnn_model_2l
+
+def build_fnn_1l(data_frame_x: pd.DataFrame):
+    """
+    Building fully connected neural network (FNN) on data with two layers
+
+    Returns:
+        model
+
+    """
+    parser = parse_arg()
+    args = parser.parse_args()
+
+    fnn_model_1l = tf.keras.models.Sequential()
+    # input layer + first hidden layer
+    fnn_model_1l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
+                                           activation='relu',
+                                           input_shape=[data_frame_x.shape[1]]))
+    fnn_model_1l.add(tf.keras.layers.Dropout(args.dropOut))
+
+    # fnn_model.summary()
+
+    # output layer
+    fnn_model_1l.add(tf.keras.layers.Dense(1))
+
+    # compile layers
+    fnn_model_1l.compile(optimizer='adam', loss='mse')
+
+    # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
+
+    return fnn_model_1l
+
 
 
 def create_prediction_plot(obs_data_frame: pd.DataFrame, prd_data_frame: pd.DataFrame):
@@ -171,7 +236,7 @@ def perform_analysis():
     #     print("Parameters: path/to/simple/file  input/folder  output/folder")
     #     sys.exit(0)
 
-    #df = pd.read_csv(args.dir_in)
+    # df = pd.read_csv(args.dir_in)
     df = pd.read_csv(args.input)
     (cal_df, tst_df) = separating_data_set(df)
 
@@ -183,12 +248,19 @@ def perform_analysis():
     print(x_test)
     print(y_test)
 
-    model = build_fnn(x_train)
+    if args.hiddenLayers == 3:
+        model = build_fnn_3l(x_train)
+    elif args.hiddenLayers == 2:
+        model = build_fnn_2l(x_train)
+    else:
+        model = build_fnn_1l(x_train)
 
     model.summary()
+
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
     random.seed(1)
-    model.fit(x_train, y_train, batch_size=args.batchSize, epochs=args.epochSize, validation_data=(x_test, y_test), callbacks=[early_stop])
+    model.fit(x_train, y_train, batch_size=args.batchSize, epochs=args.epochSize, validation_data=(x_test, y_test),
+              callbacks=[early_stop])
 
     fnn_losses = pd.DataFrame(model.history.history)
     create_losses_plot(fnn_losses)
