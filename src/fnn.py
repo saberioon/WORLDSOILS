@@ -22,11 +22,13 @@ import os
 import argparse
 import metrics
 import matplotlib.pyplot as plt
-import tensorflow as tf
+#import tensorflow as tf
+from version import __version__
+
 
 plt.style.use("ggplot")
 _OUTPUT_PATH = "script-out"
-__version__ = "v0.1--beta.3"
+
 
 
 def parse_arg():
