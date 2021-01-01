@@ -40,6 +40,26 @@ merging two csv files based on their ID
 python merhing_data.py clhs_lucas15.csv S2a_resampled_lucas15.csv
 ```
 
+__*fnn.py*__:
+
+Modelling  LUCAS or BSSL data using FNN
+
+```bash
+python fnn.py -i /path/to/input_file -o /path/to/output_folder -l 3 -e 400 -b 20 
+```
+
+-h: help 
+
+-l : number of hidden layer ; default = 3
+
+-e : epoch size; default = 400
+
+-b : batch size; default = 20 
+
+-d : droup out ; default = 0.2
+
+
+
 
 
 __*LUCAS15_analysis.py*__:
@@ -57,6 +77,8 @@ python LUCAS15_analysis.py -h
 ```
 
  
+
+
 
 __*metrics.py*__:
 

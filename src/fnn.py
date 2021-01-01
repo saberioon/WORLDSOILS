@@ -6,10 +6,10 @@
 
 
 """
-This script analysis LUCAS-15 dataset based on Fully connected neural network
+This script analysis LUCAS-15/bssl dataset based on Fully connected neural network
 
 written by : Mohammadmehdi Saberioon
-revised date: 08.12.2020
+revised date: 01.01.2021
 
 """
 import random
@@ -72,7 +72,7 @@ def splitting_dataset(data_frame: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
 
 def build_fnn_3l(data_frame_x: pd.DataFrame):
     """
-    Building fully connected neural network (FNN) on data
+    Building fully connected neural network (FNN) on data with three hidden layers
 
     Returns:
         model
@@ -109,7 +109,7 @@ def build_fnn_3l(data_frame_x: pd.DataFrame):
 
 def build_fnn_2l(data_frame_x: pd.DataFrame):
     """
-    Building fully connected neural network (FNN) on data with two layers
+    Building fully connected neural network (FNN) on data with two hidden layers
 
     Returns:
         model
@@ -141,7 +141,7 @@ def build_fnn_2l(data_frame_x: pd.DataFrame):
 
 def build_fnn_1l(data_frame_x: pd.DataFrame):
     """
-    Building fully connected neural network (FNN) on data with two layers
+    Building fully connected neural network (FNN) on data with one hidden layers
 
     Returns:
         model

@@ -6,10 +6,10 @@
 
 
 """
-This script analysis LUCAS-15 dataset based on Fully connected neural network
+This script analysis LUCAS-15/bssl dataset based on Fully connected neural network
 
 written by : Mohammadmehdi Saberioon
-revised date: 08.12.2020
+revised date: 01.01.2021
 
 """
 import random
