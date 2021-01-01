@@ -28,6 +28,7 @@ plt.style.use("ggplot")
 _OUTPUT_PATH = "script-out"
 __version__ = "v0.1--beta.3"
 
+
 def parse_arg():
     parser = argparse.ArgumentParser(prog='fnn.py',
                                      description='Fully connected neural network for WORLDSOIL')
