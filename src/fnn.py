@@ -26,10 +26,10 @@ import tensorflow as tf
 
 plt.style.use("ggplot")
 _OUTPUT_PATH = "script-out"
-
+__version__ = "v0.1--beta.3"
 
 def parse_arg():
-    parser = argparse.ArgumentParser(prog='LUCAS15_analysis.py',
+    parser = argparse.ArgumentParser(prog='fnn.py',
                                      description='Fully connected neural network for WORLDSOIL')
     parser.add_argument("-i", "--input", dest='input', type=str, help="", required=True)
     parser.add_argument("-o", "--output", dest='output', type=str, help="output filename ")
@@ -37,6 +37,7 @@ def parse_arg():
     parser.add_argument("-e", "--epochs", dest="epochSize", type=int, help="epochs value", default=400)
     parser.add_argument("-d", "--dropout", dest="dropOut", type=int, help="Dropout value", default=0.2)
     parser.add_argument("-l", "--layer", dest="hiddenLayers", type=int, help="number of hidden layers", default=3)
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s " + __version__)
 
     return parser
 
