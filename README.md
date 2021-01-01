@@ -48,8 +48,14 @@ __*LUCAS15_analysis.py*__:
 
 Modelling  LUCAS or BSSL data using FNN
 
+```bash
+python LUCAS15_analysis.py -i /path/to/input_file -o /path/to/output_folder
 ```
-python LUCAS15_analysis.py /path/to/input_file /path/to/output_folder
+
+to see other keys use this :
+
+```bash
+python LUCAS15_analysis.py -h
 ```
 
  
@@ -66,5 +72,5 @@ Submit jobs to cluster
 
 
 
-Updated: 15 Dec 2020
+Updated: 1 Jan 2021
 

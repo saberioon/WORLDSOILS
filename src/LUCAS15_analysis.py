@@ -63,8 +63,8 @@ def splitting_dataset(data_frame: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
         two pandas dataFrame: df_x and df_y
 
     """
-    data_frame_x = data_frame.iloc[:, 6:]
-    data_frame_y = data_frame.iloc[:, 5]
+    data_frame_x = data_frame.iloc[:, 5:]
+    data_frame_y = data_frame.iloc[:, 4]
 
     return data_frame_x, data_frame_y
 
