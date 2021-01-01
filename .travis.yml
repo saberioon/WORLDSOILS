@@ -23,6 +23,6 @@ install:
   - source activate DL2
 
 script:
-  - python src/test
+  - python src/test.py
 
 
