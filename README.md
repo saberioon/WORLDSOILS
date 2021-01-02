@@ -28,8 +28,6 @@ To download database and Source code/datasets you can use :
 git clone https://github.com/saberioon/WORLDSOILS.git
 ```
 
-> This is a private repository, therefore you need to enter your GitHub's password  
-
 datasets are available in : data folder 
 
 To setup environment, first install mini anaconda or anaconda then using following code in your terminal:
