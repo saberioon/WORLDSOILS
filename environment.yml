@@ -17,9 +17,9 @@ dependencies:
   - python=3.7.9=h7579374_0
   - scikit-learn=0.23.2=py37h0573a6f_0
   - scipy=1.1.0=py37_nomklh9c1e066_0
-  - tensorboard=1.15.5=py37hf484d3e_0
+  - tensorboard=1.14.0=py37hf484d3e_0
   - tensorboard-plugin-wit=1.6.0=py_0
-  - tensorflow=1.15.5=mkl_py37h45c423b_0
-  - tensorflow-base=1.15.5=mkl_py37h7ce6ba3_0
-  - tensorflow-estimator=1.15.5=py_0
+  - tensorflow=1.14.0=mkl_py37h45c423b_0
+  - tensorflow-base=1.14.0=mkl_py37h7ce6ba3_0
+  - tensorflow-estimator=1.14.0=py_0
   - yaml=0.2.5=h7b6447c_0
