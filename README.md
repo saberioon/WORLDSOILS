@@ -32,14 +32,26 @@ git clone https://github.com/saberioon/WORLDSOILS.git
 
 datasets are available in : data folder 
 
+To setup environment, first install mini anaconda or anaconda then using following code in your terminal:
 
+```bash
+conda env create --file environment.yml
+```
+
+To activate your virtual environment use this :
+
+```bash
+source activate DL2
+```
+
+ 
 
 __*merging_data.py*__:
 
 merging two csv files based on their ID 
 
 ```bash
-python merhing_data.py clhs_lucas15.csv S2a_resampled_lucas15.csv
+python src/merging_data.py clhs_lucas15.csv S2a_resampled_lucas15.csv
 ```
 
 __*fnn.py*__:
@@ -47,7 +59,7 @@ __*fnn.py*__:
 Modelling  LUCAS or BSSL data using FNN
 
 ```bash
-python fnn.py -i /path/to/input_file -o /path/to/output_folder -l 3 -e 400 -b 20 
+python src/fnn.py -i /path/to/input_file -o /path/to/output_folder -l 3 -e 400 -b 20 
 ```
 
 -h: help 
@@ -69,13 +81,13 @@ __*LUCAS15_analysis.py*__:
 Modelling  LUCAS or BSSL data using FNN
 
 ```bash
-python LUCAS15_analysis.py -i /path/to/input_file -o /path/to/output_folder
+python src/LUCAS15_analysis.py -i /path/to/input_file -o /path/to/output_folder
 ```
 
 to see other keys use this :
 
 ```bash
-python LUCAS15_analysis.py -h
+python src/LUCAS15_analysis.py -h
 ```
 
  
@@ -94,5 +106,5 @@ Submit jobs to cluster
 
 
 
-Updated: 1 Jan 2021
+Updated: 2 Jan 2021
 
