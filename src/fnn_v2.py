@@ -24,7 +24,7 @@ import metrics
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from version import __version__
-
+from preProcessing import scaling_y_data
 
 plt.style.use("ggplot")
 _OUTPUT_PATH = "script-out"
@@ -86,28 +86,30 @@ def build_fnn_4l(data_frame_x: pd.DataFrame):
 
     fnn_model_4l = tf.keras.models.Sequential()
     # input layer + first hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                           activation='relu',
-                                           input_shape=[data_frame_x.shape[1]]))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], input_shape=[data_frame_x.shape[1]]))
+    fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # third hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # fourth hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model_4l.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
 
-    fnn_model_4l.compile(optimizer='adam', loss='mse')
+    fnn_model_4l.compile(optimizer='adam', loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
 
@@ -128,23 +130,25 @@ def build_fnn_3l(data_frame_x: pd.DataFrame):
     fnn_model = tf.keras.models.Sequential()
     # input layer + first hidden layer
     fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                        activation='relu',
                                         input_shape=[data_frame_x.shape[1]]))
+    fnn_model.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     # third hidden layer
-    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
 
-    fnn_model.compile(optimizer='adam', loss='mse')
+    fnn_model.compile(optimizer='adam', loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
 
@@ -165,19 +169,20 @@ def build_fnn_2l(data_frame_x: pd.DataFrame):
     fnn_model_2l = tf.keras.models.Sequential()
     # input layer + first hidden layer
     fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                           activation='relu',
                                            input_shape=[data_frame_x.shape[1]]))
+    fnn_model_2l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_2l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], activation='relu'))
+    fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_2l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_2l.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model_2l.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
 
-    fnn_model_2l.compile(optimizer='adam', loss='mse')
+    fnn_model_2l.compile(optimizer='adam', loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
 
@@ -198,8 +203,8 @@ def build_fnn_1l(data_frame_x: pd.DataFrame):
     fnn_model_1l = tf.keras.models.Sequential()
     # input layer + first hidden layer
     fnn_model_1l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                           activation='relu',
                                            input_shape=[data_frame_x.shape[1]]))
+    fnn_model_1l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
     fnn_model_1l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # fnn_model.summary()
@@ -208,7 +213,7 @@ def build_fnn_1l(data_frame_x: pd.DataFrame):
     fnn_model_1l.add(tf.keras.layers.Dense(1))
 
     # compile layers
-    fnn_model_1l.compile(optimizer='adam', loss='mse')
+    fnn_model_1l.compile(optimizer='adam', loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
 
@@ -290,6 +295,8 @@ def perform_analysis():
 
     # df = pd.read_csv(args.dir_in)
     df = pd.read_csv(args.input)
+    df = df.apply(lambda x: scaling_y_data(x) if x.name == 'OC' else x) #scaling OC data
+
     (cal_df, tst_df) = separating_data_set(df)
 
     (x_train, y_train) = splitting_dataset(cal_df)
@@ -322,7 +329,7 @@ def perform_analysis():
     fnn_losses = pd.DataFrame(model.history.history)
     create_losses_plot(fnn_losses)
 
-    trained_model_save(model, "trained_model")
+    trained_model_save(model, "trained_model.h5")
 
     predictions = model.predict(x_test)
 
