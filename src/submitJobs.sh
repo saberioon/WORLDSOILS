@@ -30,10 +30,10 @@ for i in `seq 1 1 5` # lines in the cluster_input.txt file that shall be used as
     # settings and commands for running my job
     echo "source /home/saberioo/soft/condaroot/conda-main/etc/profile.d/conda.csh" > /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
     echo "conda activate DL2" >> /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
-    echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $data_path/$program_input -o $dir_out" -b 20 -e 500 -l 2 >> /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
+    echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $data_path/$program_input -o $dir_out" -b 20 -e 500 -l 4   >> /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
 
     # show what will be done
-    echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $data_path/$program_input -o $dir_out" -b 20 -e 500 -l 2
+    echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $data_path/$program_input -o $dir_out" -b 20 -e 500 -l 4
 
     # submit run script to cluster
     bsub -R "rusage[mem=100]" -o out/run_"$i".out -e out/run_"$i".err -q qintel -J job_"$i" csh /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
