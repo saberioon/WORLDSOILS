@@ -68,9 +68,15 @@ def splitting_dataset(data_frame: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
         two pandas dataFrame: df_x and df_y
 
     """
-    data_frame_x = data_frame.iloc[:, 7:]
+    # for full dataset
+    # data_frame_x = data_frame.iloc[:, 5:]
+    # # data_frame_y = data_frame.iloc[:, 4]
+    # data_frame_y = data_frame['OC'].values
+
+    # For dataset witout outliers
+    data_frame_x = data_frame.iloc[:, 6:]
     # data_frame_y = data_frame.iloc[:, 4]
-    data_frame_y = data_frame['OC']
+    data_frame_y = data_frame['OC'].values
 
     return data_frame_x, data_frame_y
 
@@ -117,7 +123,7 @@ def build_fnn_5l(data_frame_x: pd.DataFrame):
     # fnn_model.summary()
 
     # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model_5l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -162,7 +168,7 @@ def build_fnn_4l(data_frame_x: pd.DataFrame):
     # fnn_model.summary()
 
     # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model_4l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -202,7 +208,7 @@ def build_fnn_3l(data_frame_x: pd.DataFrame):
 
     # fnn_model.summary()
     # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -236,8 +242,8 @@ def build_fnn_2l(data_frame_x: pd.DataFrame):
     fnn_model_2l.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
-    # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    opt = tf.keras.optimizers.SGD(learning_rate=0.001, nesterov=True)
+    # opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model_2l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -269,8 +275,8 @@ def build_fnn_1l(data_frame_x: pd.DataFrame):
     fnn_model_1l.add(tf.keras.layers.Dense(1))
 
     # compile layers
-    # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    opt = tf.keras.optimizers.SGD(learning_rate=0.001, nesterov=True)
+    # opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model_1l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -338,39 +344,44 @@ def perform_analysis():
     args = parser.parse_args()
 
     df = pd.read_csv(args.input)
-    df = df.apply(lambda x: preProcessing.scaling_y_data(x) if x.name == 'OC' else x)  # scaling OC data
+    # df = df.apply(lambda x: preProcessing.scaling_y_data(x) if x.name == 'OC' else x)  # scaling OC data
 
     (cal_df, tst_df) = separating_data_set(df)
 
-    (x_train, y_train) = splitting_dataset(cal_df)
-    (x_test, y_test) = splitting_dataset(tst_df)
+    (X_train, y_train) = splitting_dataset(cal_df)
+    (X_test, y_test) = splitting_dataset(tst_df)
 
+    # Scale the features
+    X_train = preProcessing.scaler_min_max_x_data(X_train)
+    X_test = preProcessing.scaler_min_max_x_data(X_test)
 
+    y_train = preProcessing.scaler_min_max_y_data(y_train)
+    y_test = preProcessing.scaler_min_max_y_data(y_test)
 
-    print(x_train)
+    print(X_train)
     print(y_train)
-    print(x_test)
+    print(X_test)
     print(y_test)
 
-    print(x_train.shape)
+    print(X_train.shape)
     print(y_train.shape)
 
     if args.hiddenLayers == 5:
-        model = build_fnn_5l(x_train)
+        model = build_fnn_5l(X_train)
     elif args.hiddenLayers == 4:
-        model = build_fnn_4l(x_train)
+        model = build_fnn_4l(X_train)
     elif args.hiddenLayers == 3:
-        model = build_fnn_3l(x_train)
+        model = build_fnn_3l(X_train)
     elif args.hiddenLayers == 2:
-        model = build_fnn_2l(x_train)
+        model = build_fnn_2l(X_train)
     else:
-        model = build_fnn_1l(x_train)
+        model = build_fnn_1l(X_train)
 
     model.summary()
 
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
     random.seed(1)
-    model.fit(x_train, y_train, batch_size=args.batchSize, epochs=args.epochSize, validation_data=(x_test, y_test),
+    model.fit(X_train, y_train, batch_size=args.batchSize, epochs=args.epochSize, validation_data=(X_test, y_test),
               callbacks=[early_stop])
 
     fnn_losses = pd.DataFrame(model.history.history)
@@ -378,7 +389,7 @@ def perform_analysis():
 
     trained_model_save(model, "trained_model.h5")
 
-    predictions = model.predict(x_test)
+    predictions = model.predict(X_test)
 
     print("MSE:", metrics.MSE(y_test, predictions))
     print("RMSE:", metrics.RMSE(y_test, predictions))

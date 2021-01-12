@@ -14,8 +14,8 @@ revised date: 01.01.2021
 """
 
 import pandas as pd
-from sklearn.preprocessing import robust_scale
-from sklearn.preprocessing import StandardScaler
+import numpy as np
+from sklearn.preprocessing import robust_scale, StandardScaler, MinMaxScaler
 
 
 def scaling_y_data(data_frame: pd.DataFrame) -> pd.DataFrame:
@@ -42,3 +42,18 @@ def scaler_data(data_frame: pd.DataFrame) -> pd.DataFrame:
     return data_frame_scaled
 
 
+def scaler_min_max_x_data(data_frame: pd.DataFrame) -> pd.DataFrame:
+
+    scaler = MinMaxScaler()
+    data_frame = scaler.fit_transform(data_frame)
+
+    return data_frame
+
+
+def scaler_min_max_y_data(data_frame: pd.DataFrame) -> pd.DataFrame:
+
+    scaler = MinMaxScaler()
+    data_frame = data_frame.reshape(-1, 1)
+    data_frame = scaler.fit_transform(data_frame)
+
+    return data_frame
