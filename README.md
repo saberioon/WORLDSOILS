@@ -57,7 +57,7 @@ __*fnn.py*__:
 Modelling  LUCAS or BSSL data using FNN
 
 ```bash
-python src/fnn-v2.py -i /path/to/input_file -o /path/to/output_folder -l 3 -e 400 -b 20 
+python src/fnn_v2.py -i /path/to/input_file -o /path/to/output_folder -l 3 -e 400 -b 20 
 ```
 
 -h: help 
