@@ -9,7 +9,7 @@
 
 
 dir_out="/home/saberioo/WORLDSOILS/script-out"
-dir_in="/home/saberioo/WORLDSOILS/data/CHIME_merged_lucas15.csv"
+dir_in="/home/saberioo/WORLDSOILS/data/CHIME_lucas15_merged_clean.csv"
 
 # shellcheck disable=SC2006
 i=`date +"%s"`
@@ -21,9 +21,9 @@ i=`date +"%s"`
   # settings and commands for running my job
   echo "source /home/saberioo/soft/condaroot/conda-main/etc/profile.d/conda.csh" > /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
   echo "conda activate DL2" >> /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
-  echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $dir_in -o $dir_out" -b 40 -e 500 -l 1 >> /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
+  echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $dir_in -o $dir_out" -b 8 -e 300 -l 4 -r 0.001 >> /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp
   # show what will be done
-  echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $dir_in -o $dir_out" -b 40 -e 500 -l 1
+  echo "python /home/saberioo/WORLDSOILS/src/fnn.py -i $dir_in -o $dir_out" -b 8 -e 300 -l 4 -r 0.001
 
   # submit run script to cluster
   bsub -R "rusage[mem=100]" -o out/run_"$i".out -e out/run_"$i".err -q qintel -J job_"$i" csh /home/saberioo/WORLDSOILS/run_jobs/run_"$i".tmp

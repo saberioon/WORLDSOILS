@@ -37,10 +37,11 @@ def parse_arg():
     parser.add_argument("-o", "--output", dest='output', type=str, help="output filename ")
     parser.add_argument("-b", "--batchSize", dest="batchSize", type=int, help="batch size value", default=20)
     parser.add_argument("-e", "--epochs", dest="epochSize", type=int, help="epochs value", default=400)
-    parser.add_argument("-d", "--dropout", dest="dropOut", type=int, help="Dropout value", default=0.2)
+    parser.add_argument("-d", "--dropout", dest="dropOut", type=float, help="Dropout value", default=0.2)
     parser.add_argument("-l", "--layer", dest="hiddenLayers", type=int, help="number of hidden layers", default=3)
     parser.add_argument("-v", "--version", action="version", version="%(prog)s " + __version__)
-    # parser.add_argument("-p", "--optimizer", dest="optimizer", type=str, help= "define the optimizer", default='adam')
+    parser.add_argument("-r", "--learnRate", dest="learnRate", type=float, help="set the learning rate", default=0.01)
+    parser.add_argument("-n", "--normalizer", dest="normalizr", type=str, help="set the Normalizer", default="he_uniform")
 
     return parser
 
@@ -68,7 +69,7 @@ def splitting_dataset(data_frame: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
         two pandas dataFrame: df_x and df_y
 
     """
-    # for full dataset
+    # # for full dataset
     # data_frame_x = data_frame.iloc[:, 5:]
     # # data_frame_y = data_frame.iloc[:, 4]
     # data_frame_y = data_frame['OC'].values
@@ -94,36 +95,43 @@ def build_fnn_5l(data_frame_x: pd.DataFrame):
 
     fnn_model_5l = tf.keras.models.Sequential()
     # input layer + first hidden layer
-    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], input_shape=[data_frame_x.shape[1]]))
+    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], input_shape=[data_frame_x.shape[1]],
+                                           kernel_initializer=args.normalizr))
+    fnn_model_5l.add(tf.keras.layers.BatchNormalization())
     fnn_model_5l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
+
+    # fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], kernel_initializer=args.normalizr))
+    fnn_model_5l.add(tf.keras.layers.BatchNormalization())
     fnn_model_5l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # third hidden layer
-    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], kernel_initializer=args.normalizr))
+    fnn_model_5l.add(tf.keras.layers.BatchNormalization())
     fnn_model_5l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # fourth hidden layer
-    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], kernel_initializer=args.normalizr))
+    fnn_model_5l.add(tf.keras.layers.BatchNormalization())
     fnn_model_5l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # fifth hidden layer
-    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_5l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], kernel_initializer=args.normalizr))
+    fnn_model_5l.add(tf.keras.layers.BatchNormalization())
     fnn_model_5l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_5l.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model_5l.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
 
     # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.001)
+    opt = tf.keras.optimizers.Adam(learning_rate=args.learnRate)
     fnn_model_5l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -144,31 +152,36 @@ def build_fnn_4l(data_frame_x: pd.DataFrame):
 
     fnn_model_4l = tf.keras.models.Sequential()
     # input layer + first hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], input_shape=[data_frame_x.shape[1]]))
-    fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], input_shape=[data_frame_x.shape[1]],
+                                           kernel_initializer=args.normalizr))
+    fnn_model_4l.add(tf.keras.layers.BatchNormalization())
+    fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.1))
+    # fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], kernel_initializer=args.normalizr))
+    fnn_model_4l.add(tf.keras.layers.BatchNormalization())
     fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # third hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],kernel_initializer=args.normalizr))
+    fnn_model_4l.add(tf.keras.layers.BatchNormalization())
     fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # fourth hidden layer
-    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_4l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1], kernel_initializer=args.normalizr))
+    fnn_model_4l.add(tf.keras.layers.BatchNormalization())
     fnn_model_4l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model_4l.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model_4l.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
 
     # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.001)
+    opt = tf.keras.optimizers.Adam(learning_rate=args.learnRate)
     fnn_model_4l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -190,25 +203,31 @@ def build_fnn_3l(data_frame_x: pd.DataFrame):
     fnn_model = tf.keras.models.Sequential()
     # input layer + first hidden layer
     fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                        input_shape=[data_frame_x.shape[1]]))
+                                        input_shape=[data_frame_x.shape[1]],
+                                        kernel_initializer=args.normalizr))
+    fnn_model.add(tf.keras.layers.BatchNormalization())
     fnn_model.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
+                                        kernel_initializer=args.normalizr))
+    fnn_model.add(tf.keras.layers.BatchNormalization())
     fnn_model.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     # third hidden layer
-    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
+                                        kernel_initializer=args.normalizr))
+    fnn_model.add(tf.keras.layers.BatchNormalization())
     fnn_model.add(tf.keras.layers.LeakyReLU(alpha=0.01))
-    fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
+    # fnn_model.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
     # opt = tf.keras.optimizers.SGD(learning_rate=0.0001, nesterov=True)
-    opt = tf.keras.optimizers.Adam(learning_rate=0.001)
+    opt = tf.keras.optimizers.Adam(learning_rate=args.learnRate)
     fnn_model.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
     # early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=25)
@@ -230,19 +249,21 @@ def build_fnn_2l(data_frame_x: pd.DataFrame):
     fnn_model_2l = tf.keras.models.Sequential()
     # input layer + first hidden layer
     fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                           input_shape=[data_frame_x.shape[1]]))
+                                           input_shape=[data_frame_x.shape[1]],
+                                           kernel_initializer=args.normalizr))
     fnn_model_2l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
     fnn_model_2l.add(tf.keras.layers.Dropout(args.dropOut))
 
     # second hidden layer
-    fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1]))
+    fnn_model_2l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
+                                           kernel_initializer=args.normalizr))
     fnn_model_2l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
     fnn_model_2l.add(tf.keras.layers.Dropout(args.dropOut))
 
     fnn_model_2l.add(tf.keras.layers.Dense(1))
 
     # fnn_model.summary()
-    opt = tf.keras.optimizers.SGD(learning_rate=0.001, nesterov=True)
+    opt = tf.keras.optimizers.SGD(learning_rate=args.learnRate, nesterov=True)
     # opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model_2l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 
@@ -265,7 +286,8 @@ def build_fnn_1l(data_frame_x: pd.DataFrame):
     fnn_model_1l = tf.keras.models.Sequential()
     # input layer + first hidden layer
     fnn_model_1l.add(tf.keras.layers.Dense(units=data_frame_x.shape[1],
-                                           input_shape=[data_frame_x.shape[1]]))
+                                           input_shape=[data_frame_x.shape[1]],
+                                           kernel_initializer=args.normalizr))
     fnn_model_1l.add(tf.keras.layers.LeakyReLU(alpha=0.01))
     fnn_model_1l.add(tf.keras.layers.Dropout(args.dropOut))
 
@@ -275,7 +297,7 @@ def build_fnn_1l(data_frame_x: pd.DataFrame):
     fnn_model_1l.add(tf.keras.layers.Dense(1))
 
     # compile layers
-    opt = tf.keras.optimizers.SGD(learning_rate=0.001, nesterov=True)
+    opt = tf.keras.optimizers.SGD(learning_rate=args.learnRate, nesterov=True)
     # opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     fnn_model_1l.compile(optimizer=opt, loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
 

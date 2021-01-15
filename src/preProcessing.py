@@ -53,7 +53,8 @@ def scaler_min_max_x_data(data_frame: pd.DataFrame) -> pd.DataFrame:
 def scaler_min_max_y_data(data_frame: pd.DataFrame) -> pd.DataFrame:
 
     scaler = MinMaxScaler()
-    data_frame = data_frame.reshape(-1, 1)
+    data_frame = np.reshape(data_frame, (-1, 1))
+    # data_frame = data_frame.reshape(-1, 1)
     data_frame = scaler.fit_transform(data_frame)
 
     return data_frame

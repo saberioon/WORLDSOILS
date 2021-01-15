@@ -22,7 +22,7 @@ import os
 import argparse
 import metrics
 import matplotlib.pyplot as plt
-import tensorflow as tf
+#import tensorflow as tf
 from version import __version__
 
 
