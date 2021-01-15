@@ -70,7 +70,9 @@ python src/fnn_v2.py -i /path/to/input_file -o /path/to/output_folder -l 3 -e 40
 
 -d : droup out ; default = 0.2
 
+-r : learning rate ; default = 0.01
 
+-k : kernel initializer ; default = he_normal
 
 
 
