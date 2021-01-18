@@ -13,9 +13,10 @@ revised date: 01.01.2021
 
 """
 
-
-from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score, r2_score
 import numpy as np
+
+
 # import tensorflow as tf
 
 def MSE(obs, pred):
@@ -36,7 +37,7 @@ def RMSE(obs, pred):
     return np.sqrt(mean_squared_error(obs, pred))
 
 
-def R2(obs, pred):
+def evs(obs, pred):
     """
 
     :return:
@@ -53,3 +54,13 @@ def RPD(obs, pred):
     mse = mean_squared_error(obs, pred)
     rpd = obs.std() / np.sqrt(mse)
     return rpd
+
+
+def R2(obs, pred):
+    """
+
+    :param obs:
+    :param pred:
+    :return:
+    """
+    return r2_score(obs, pred)
