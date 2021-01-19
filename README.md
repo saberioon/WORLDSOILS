@@ -1,4 +1,4 @@
-[![ ](https://img.shields.io/badge/version-v0.1--beta.3-blue)](https://github.com/saberioon/WORLDSOILS) [![Build Status](https://travis-ci.com/saberioon/WORLDSOILS.svg?token=vEEN7szXM6Vgp1qaWpuH&branch=main)](https://travis-ci.com/saberioon/WORLDSOILS)
+[![ ](https://img.shields.io/badge/version-v0.1--beta.3-blue)](https://github.com/saberioon/WORLDSOILS) [![Build Status](https://travis-ci.com/saberioon/WORLDSOILS.svg?token=vEEN7szXM6Vgp1qaWpuH&branch=main)](https://travis-ci.com/saberioon/WORLDSOILS) [![DOI](https://zenodo.org/badge/318167857.svg)](https://zenodo.org/badge/latestdoi/318167857)    
 
 
 
