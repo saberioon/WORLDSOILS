@@ -1,4 +1,4 @@
-[![ ](https://img.shields.io/badge/version-v0.1--beta.3-blue)](https://github.com/saberioon/WORLDSOILS) [![Build Status](https://travis-ci.com/saberioon/WORLDSOILS.svg?token=vEEN7szXM6Vgp1qaWpuH&branch=main)](https://travis-ci.com/saberioon/WORLDSOILS) [![DOI](https://zenodo.org/badge/318167857.svg)](https://zenodo.org/badge/latestdoi/318167857)    
+[![ ](https://img.shields.io/badge/version-v0.1--beta.6-blue)](https://github.com/saberioon/WORLDSOILS) [![Build Status](https://travis-ci.com/saberioon/WORLDSOILS.svg?token=vEEN7szXM6Vgp1qaWpuH&branch=main)](https://travis-ci.com/saberioon/WORLDSOILS) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4453053.svg)](https://doi.org/10.5281/zenodo.4453053) 
 
 
 
@@ -7,8 +7,6 @@
 Check the [Wiki page](https://github.com/saberioon/WORLDSOILS/wiki) for Documentation.
 
 Check the [Project tab](https://github.com/saberioon/WORLDSOILS/projects/1) for tracking tasks.
-
-Deadline for delivering model's outputs: __15 Jan 2021__
 
 Tips:
 
