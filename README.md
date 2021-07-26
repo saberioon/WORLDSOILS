@@ -98,5 +98,5 @@ Finding outliers using Mahalanobis distance + Principal Component Analysis
 
 
 
-Updated: 26 July 2021..
+Updated: 26 July 2021.
 
