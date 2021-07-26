@@ -1,0 +1,5 @@
+CHIME_lucas15_merged_clean.csv
+EnMAP_lucas15_merged_clean.csv
+L8_lucas15_merged_clean.csv
+S2a_lucas15_merged_clean.csv
+S2b_lucas15_merged_clean.csv
