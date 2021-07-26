@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText:`2020 Helmholtz Centre Potsdam - GFZ German Research Centre for Geosciences Potsdam, Germany'
+# SPDX-License-Identifier: MIT
+
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler

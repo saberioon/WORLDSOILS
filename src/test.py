@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText:`2020 Helmholtz Centre Potsdam - GFZ German Research Centre for Geosciences Potsdam, Germany'
+# SPDX-License-Identifier: MIT
+
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import unittest
 from version import __version__
 import os
