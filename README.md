@@ -1,4 +1,4 @@
-[![ ](https://img.shields.io/badge/version-v0.1--beta.3-blue)](https://github.com/saberioon/WORLDSOILS) [![Build Status](https://travis-ci.com/saberioon/WORLDSOILS.svg?token=vEEN7szXM6Vgp1qaWpuH&branch=main)](https://travis-ci.com/saberioon/WORLDSOILS) [![DOI](https://zenodo.org/badge/318167857.svg)](https://zenodo.org/badge/latestdoi/318167857)    
+[![ ](https://img.shields.io/badge/version-v0.1--beta.7-blue)](https://github.com/saberioon/WORLDSOILS) [![Build Status](https://travis-ci.com/saberioon/WORLDSOILS.svg?token=vEEN7szXM6Vgp1qaWpuH&branch=main)](https://travis-ci.com/saberioon/WORLDSOILS) [![DOI](https://zenodo.org/badge/318167857.svg)](https://zenodo.org/badge/latestdoi/318167857)    
 
 
 
@@ -30,16 +30,16 @@ git clone https://github.com/saberioon/WORLDSOILS.git
 
 datasets are available in : data folder 
 
-To setup environment, first install mini anaconda or anaconda then using following code in your terminal:
+To setup environment, first install [poetry](https://python-poetry.org/)  then using following code in your terminal:
 
 ```bash
-conda env create --file environment.yml
+poetry install
 ```
 
 To activate your virtual environment use this :
 
 ```bash
-source activate DL2
+poetry shell
 ```
 
  
