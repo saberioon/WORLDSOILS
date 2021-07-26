@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
-from fnn_v2 import splitting_dataset
+from fnn import splitting_dataset
 from sklearn.covariance import EmpiricalCovariance, MinCovDet
 from scipy.stats import chi2
 import argparse
