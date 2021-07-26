@@ -92,9 +92,9 @@ calculating R-square, RPD, MSE, RMSE
 
 
 
-__*submitJOB.sh*__:
+__***outlier_finder.py***__:
 
-Submit jobs to cluster 
+Finding outliers using Mahalanobis distance + Principal Component Analysis 
 
 
 
