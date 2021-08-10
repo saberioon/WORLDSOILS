@@ -8,7 +8,7 @@
 """
 This script analysis LUCAS-15/bssl dataset based on Fully connected neural network
 
-written by : Mohammadmehdi Saberioon
+written by : Mohammadmehdi Saberioon and Asa Gholizadeh
 revised date: 01.01.2021
 
 """
